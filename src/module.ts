@@ -135,8 +135,8 @@ import type { paths as ${pascalCase(name)}Paths } from '#build/types/${moduleNam
 ${schemas.length ? `export type OpenFetchClientName = ${schemas.map(({ name }) => `'${name}'`).join(' | ')}` : ''}
 
 ${schemas.map(({ name, fetchName }) => `
-export const ${fetchName.composable} = createUseOpenFetch<${pascalCase(name)}Paths>('${name}')
-export const ${fetchName.lazyComposable} = createUseOpenFetch<${pascalCase(name)}Paths>('${name}', true)
+export const ${fetchName.composable} = createUseOpenFetch<${pascalCase(name)}Paths, false>('${name}')
+export const ${fetchName.lazyComposable} = createUseOpenFetch<${pascalCase(name)}Paths, true>('${name}', true)
 `.trimStart()).join('\n')}`.trimStart()
       },
       write: true
@@ -156,7 +156,7 @@ declare module '#app' {
     $${name}Fetch: OpenFetchClient<${pascalCase(name)}Paths>`.trimStart()).join('\n')}
   }
 }
-        
+
 declare module 'vue' {
   interface ComponentCustomProperties {
     ${schemas.map(({ name }) => `
