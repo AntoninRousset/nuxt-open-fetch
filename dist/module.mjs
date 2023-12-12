@@ -95,6 +95,7 @@ const module = defineNuxtModule({
 import { createUseOpenFetch } from '#imports'
 ${schemas.map(({ name }) => `
 import type { paths as ${pascalCase(name)}Paths } from '#build/types/${moduleName}/${kebabCase(name)}'
+export type ${pascalCase(name)}Paths
 `.trimStart()).join("").trimEnd()}
 
 ${schemas.length ? `export type OpenFetchClientName = ${schemas.map(({ name }) => `'${name}'`).join(" | ")}` : ""}
